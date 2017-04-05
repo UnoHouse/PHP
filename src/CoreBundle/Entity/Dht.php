@@ -10,13 +10,16 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-
+use CoreBundle\Entity\Traits;
+use Knp\DoctrineBehaviors\Model;
 /**
  * @ORM\Entity
  */
 class Dht extends Base
 {
+
+    use Blameable,
+        Timestampable;
 
     /**
      * @ORM\Column(type="integer")
