@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 /**
  * @ORM\Entity
  */
-class Gas
+class Settings
 {
 
     use Blameable,
@@ -31,19 +31,19 @@ class Gas
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length="255")
      */
-    private $sensorNo;
+    private $code;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length="255")
      */
-    private $microcontrollerDate;
+    private $key;
 
     /**
-     * @ORM\Column(type="double", scale="2")
+     * @ORM\Column(type="string", length="255")
      */
-    private $sensorValue;
+    private $value;
 
     /**
      * @return mixed
@@ -64,82 +64,49 @@ class Gas
     /**
      * @return mixed
      */
-    public function getDhtNo()
+    public function getCode()
     {
-        return $this->dhtNo;
+        return $this->code;
     }
 
     /**
-     * @param mixed $dhtNo
+     * @param mixed $code
      */
-    public function setDhtNo($dhtNo)
+    public function setCode($code)
     {
-        $this->dhtNo = $dhtNo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTemp()
-    {
-        return $this->temp;
-    }
-
-    /**
-     * @param mixed $temp
-     */
-    public function setTemp($temp)
-    {
-        $this->temp = $temp;
+        $this->code = $code;
     }
 
     /**
      * @return mixed
      */
-    public function getHumidity()
+    public function getKey()
     {
-        return $this->humidity;
+        return $this->key;
     }
 
     /**
-     * @param mixed $humidity
+     * @param mixed $key
      */
-    public function setHumidity($humidity)
+    public function setKey($key)
     {
-        $this->humidity = $humidity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateArduino()
-    {
-        return $this->dateArduino;
-    }
-
-    /**
-     * @param mixed $dateArduino
-     */
-    public function setDateArduino($dateArduino)
-    {
-        $this->dateArduino = $dateArduino;
+        $this->key = $key;
     }
 
     /**
      * @return mixed
      */
-    public function getSensorValue()
+    public function getValue()
     {
-        return $this->sensorValue;
+        return $this->value;
     }
 
     /**
-     * @param mixed $sensorValue
+     * @param mixed $value
      */
-    public function setSensorValue($sensorValue)
+    public function setValue($value)
     {
-        $this->sensorValue = $sensorValue;
+        $this->value = $value;
     }
-
 
 }
