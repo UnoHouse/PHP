@@ -10,9 +10,7 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use CoreBundle\Entity\Traits;
-use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity
@@ -20,8 +18,8 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 class GasSensor
 {
 
-    use Blameable,
-        Timestampable;
+    use ORMBehaviors\Blameable\Blameable,
+        ORMBehaviors\Timestampable\Timestampable;
 
     /**
      * @ORM\Column(type="integer")
