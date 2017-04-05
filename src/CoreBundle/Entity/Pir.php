@@ -13,12 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 use CoreBundle\Entity\Traits;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
  */
-class Dht
+class Pir
 {
 
     use Blameable,
@@ -34,16 +33,16 @@ class Dht
     /**
      * @ORM\Column(type="integer")
      */
-    private $dhtNo;
+    private $pirNo;
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="datetime")
      */
-    private $temp;
+    private $movementStarted;
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="datetime")
      */
-    private $humidity;
+    private $movementStopped;
 
     /**
      * @ORM\Column(type="datetime")
@@ -115,19 +114,20 @@ class Dht
     }
 
     /**
-     * @return DateTime
+     * @return mixed
      */
-    public function getMicrocontrollerDate()
+    public function getDateArduino()
     {
-        return $this->microcontrollerDate;
+        return $this->dateArduino;
     }
 
     /**
-     * @param DateTime $microcontrollerDate
+     * @param mixed $dateArduino
      */
-    public function setMicrocontrollerDate($microcontrollerDate)
+    public function setDateArduino($dateArduino)
     {
-        $this->microcontrollerDate = $microcontrollerDate;
+        $this->dateArduino = $dateArduino;
     }
+
 
 }
