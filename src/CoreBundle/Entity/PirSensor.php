@@ -13,12 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 use CoreBundle\Entity\Traits;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
  */
-class Dht
+class PirSensor
 {
 
     use Blameable,
@@ -34,16 +33,16 @@ class Dht
     /**
      * @ORM\Column(type="integer")
      */
-    private $dhtNo;
+    private $sensorNo;
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="datetime")
      */
-    private $temp;
+    private $movementStarted;
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="datetime")
      */
-    private $humidity;
+    private $movementStopped;
 
     /**
      * @ORM\Column(type="datetime")
@@ -69,53 +68,53 @@ class Dht
     /**
      * @return mixed
      */
-    public function getDhtNo()
+    public function getSensorNo()
     {
-        return $this->dhtNo;
+        return $this->sensorNo;
     }
 
     /**
-     * @param mixed $dhtNo
+     * @param mixed $sensorNo
      */
-    public function setDhtNo($dhtNo)
+    public function setSensorNo($sensorNo)
     {
-        $this->dhtNo = $dhtNo;
+        $this->sensorNo = $sensorNo;
     }
 
     /**
      * @return mixed
      */
-    public function getTemp()
+    public function getMovementStarted()
     {
-        return $this->temp;
+        return $this->movementStarted;
     }
 
     /**
-     * @param mixed $temp
+     * @param mixed $movementStarted
      */
-    public function setTemp($temp)
+    public function setMovementStarted($movementStarted)
     {
-        $this->temp = $temp;
+        $this->movementStarted = $movementStarted;
     }
 
     /**
      * @return mixed
      */
-    public function getHumidity()
+    public function getMovementStopped()
     {
-        return $this->humidity;
+        return $this->movementStopped;
     }
 
     /**
-     * @param mixed $humidity
+     * @param mixed $movementStopped
      */
-    public function setHumidity($humidity)
+    public function setMovementStopped($movementStopped)
     {
-        $this->humidity = $humidity;
+        $this->movementStopped = $movementStopped;
     }
 
     /**
-     * @return DateTime
+     * @return mixed
      */
     public function getMicrocontrollerDate()
     {
@@ -123,7 +122,7 @@ class Dht
     }
 
     /**
-     * @param DateTime $microcontrollerDate
+     * @param mixed $microcontrollerDate
      */
     public function setMicrocontrollerDate($microcontrollerDate)
     {

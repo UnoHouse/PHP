@@ -13,11 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 use CoreBundle\Entity\Traits;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
  */
-class Gas
+class DhtSensor
 {
 
     use Blameable,
@@ -33,17 +34,21 @@ class Gas
     /**
      * @ORM\Column(type="integer")
      */
-    private $sensorNo;
+    private $dhtNo;
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $temp;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $humidity;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $microcontrollerDate;
-
-    /**
-     * @ORM\Column(type="double", scale="2")
-     */
-    private $sensorValue;
 
     /**
      * @return mixed
@@ -110,36 +115,19 @@ class Gas
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
-    public function getDateArduino()
+    public function getMicrocontrollerDate()
     {
-        return $this->dateArduino;
+        return $this->microcontrollerDate;
     }
 
     /**
-     * @param mixed $dateArduino
+     * @param DateTime $microcontrollerDate
      */
-    public function setDateArduino($dateArduino)
+    public function setMicrocontrollerDate($microcontrollerDate)
     {
-        $this->dateArduino = $dateArduino;
+        $this->microcontrollerDate = $microcontrollerDate;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getSensorValue()
-    {
-        return $this->sensorValue;
-    }
-
-    /**
-     * @param mixed $sensorValue
-     */
-    public function setSensorValue($sensorValue)
-    {
-        $this->sensorValue = $sensorValue;
-    }
-
 
 }

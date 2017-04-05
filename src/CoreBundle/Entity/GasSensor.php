@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 /**
  * @ORM\Entity
  */
-class Pir
+class GasSensor
 {
 
     use Blameable,
@@ -33,21 +33,17 @@ class Pir
     /**
      * @ORM\Column(type="integer")
      */
-    private $pirNo;
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $movementStarted;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $movementStopped;
+    private $sensorNo;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $microcontrollerDate;
+
+    /**
+     * @ORM\Column(type="double", scale="2")
+     */
+    private $sensorValue;
 
     /**
      * @return mixed
@@ -68,66 +64,49 @@ class Pir
     /**
      * @return mixed
      */
-    public function getDhtNo()
+    public function getSensorNo()
     {
-        return $this->dhtNo;
+        return $this->sensorNo;
     }
 
     /**
-     * @param mixed $dhtNo
+     * @param mixed $sensorNo
      */
-    public function setDhtNo($dhtNo)
+    public function setSensorNo($sensorNo)
     {
-        $this->dhtNo = $dhtNo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTemp()
-    {
-        return $this->temp;
-    }
-
-    /**
-     * @param mixed $temp
-     */
-    public function setTemp($temp)
-    {
-        $this->temp = $temp;
+        $this->sensorNo = $sensorNo;
     }
 
     /**
      * @return mixed
      */
-    public function getHumidity()
+    public function getMicrocontrollerDate()
     {
-        return $this->humidity;
+        return $this->microcontrollerDate;
     }
 
     /**
-     * @param mixed $humidity
+     * @param mixed $microcontrollerDate
      */
-    public function setHumidity($humidity)
+    public function setMicrocontrollerDate($microcontrollerDate)
     {
-        $this->humidity = $humidity;
+        $this->microcontrollerDate = $microcontrollerDate;
     }
 
     /**
      * @return mixed
      */
-    public function getDateArduino()
+    public function getSensorValue()
     {
-        return $this->dateArduino;
+        return $this->sensorValue;
     }
 
     /**
-     * @param mixed $dateArduino
+     * @param mixed $sensorValue
      */
-    public function setDateArduino($dateArduino)
+    public function setSensorValue($sensorValue)
     {
-        $this->dateArduino = $dateArduino;
+        $this->sensorValue = $sensorValue;
     }
-
 
 }

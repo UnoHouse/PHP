@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 /**
  * @ORM\Entity
  */
-class Light
+class LightSensor
 {
 
     use Blameable,
@@ -64,65 +64,33 @@ class Light
     /**
      * @return mixed
      */
-    public function getDhtNo()
+    public function getSensorNo()
     {
-        return $this->dhtNo;
+        return $this->sensorNo;
     }
 
     /**
-     * @param mixed $dhtNo
+     * @param mixed $sensorNo
      */
-    public function setDhtNo($dhtNo)
+    public function setSensorNo($sensorNo)
     {
-        $this->dhtNo = $dhtNo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTemp()
-    {
-        return $this->temp;
-    }
-
-    /**
-     * @param mixed $temp
-     */
-    public function setTemp($temp)
-    {
-        $this->temp = $temp;
+        $this->sensorNo = $sensorNo;
     }
 
     /**
      * @return mixed
      */
-    public function getHumidity()
+    public function getMicrocontrollerDate()
     {
-        return $this->humidity;
+        return $this->microcontrollerDate;
     }
 
     /**
-     * @param mixed $humidity
+     * @param mixed $microcontrollerDate
      */
-    public function setHumidity($humidity)
+    public function setMicrocontrollerDate($microcontrollerDate)
     {
-        $this->humidity = $humidity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateArduino()
-    {
-        return $this->dateArduino;
-    }
-
-    /**
-     * @param mixed $dateArduino
-     */
-    public function setDateArduino($dateArduino)
-    {
-        $this->dateArduino = $dateArduino;
+        $this->microcontrollerDate = $microcontrollerDate;
     }
 
     /**
@@ -140,6 +108,5 @@ class Light
     {
         $this->sensorValue = $sensorValue;
     }
-
 
 }
