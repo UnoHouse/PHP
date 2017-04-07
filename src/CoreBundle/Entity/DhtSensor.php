@@ -10,13 +10,17 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
  */
-class Dht extends Base
+class DhtSensor
 {
+
+    use ORMBehaviors\Blameable\Blameable,
+        ORMBehaviors\Timestampable\Timestampable;
 
     /**
      * @ORM\Column(type="integer")
@@ -42,7 +46,7 @@ class Dht extends Base
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateArduino;
+    private $microcontrollerDate;
 
     /**
      * @return mixed
@@ -109,20 +113,19 @@ class Dht extends Base
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
-    public function getDateArduino()
+    public function getMicrocontrollerDate()
     {
-        return $this->dateArduino;
+        return $this->microcontrollerDate;
     }
 
     /**
-     * @param mixed $dateArduino
+     * @param DateTime $microcontrollerDate
      */
-    public function setDateArduino($dateArduino)
+    public function setMicrocontrollerDate($microcontrollerDate)
     {
-        $this->dateArduino = $dateArduino;
+        $this->microcontrollerDate = $microcontrollerDate;
     }
-
 
 }

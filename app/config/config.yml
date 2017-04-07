@@ -69,6 +69,13 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+knp_doctrine_behaviors:
+    blameable:      true
+    timestampable:  true
+    geocodable:     false
+    loggable:       false
+    sluggable:      false
+    soft_deletable: false
 sonata_block:
     default_contexts: [cms]
     blocks:

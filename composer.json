@@ -31,6 +31,8 @@
         "twig/twig": "^1.0||^2.0",
         "sonata-project/admin-bundle": "^3.16",
         "sonata-project/doctrine-orm-admin-bundle": "^3.1"
+        "twig/twig": "^1.0||^2.0",
+        "knplabs/doctrine-behaviors": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
