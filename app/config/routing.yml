@@ -1,7 +1,7 @@
-api:
-    resource: "@ApiBundle/Controller/"
+api_android:
+    resource: "@ApiAndroidBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /api/android
 
 app:
     resource: "@CoreBundle/Controller/"
