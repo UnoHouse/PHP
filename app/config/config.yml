@@ -68,3 +68,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+knp_doctrine_behaviors:
+    blameable:      true
+    timestampable:  true
+    geocodable:     false
+    loggable:       false
+    sluggable:      false
+    soft_deletable: false
