@@ -5,7 +5,7 @@ namespace CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
@@ -28,11 +28,6 @@ class User extends BaseUser
      * @ORM\ManyToMany(targetEntity="Role", mappedBy="user")
      */
     protected $adminRoles;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AuditLog", mappedBy="user")
-     */
-    protected $auditLogs;
 
     /**
      * @var string
@@ -60,11 +55,11 @@ class User extends BaseUser
     /**
      * Add adminRole
      *
-     * @param \Mamf\AdminBundle\Entity\Role $adminRole
+     * @param \CoreBundle\Entity\Role $adminRole
      *
      * @return User
      */
-    public function addAdminRole(\Mamf\AdminBundle\Entity\Role $adminRole)
+    public function addAdminRole(\CoreBundle\Entity\Role $adminRole)
     {
         $this->adminRoles[] = $adminRole;
         $adminRole->addUser($this);
@@ -74,9 +69,9 @@ class User extends BaseUser
     /**
      * Remove adminRole
      *
-     * @param \Mamf\AdminBundle\Entity\Role $adminRole
+     * @param \CoreBundle\Entity\Role $adminRole
      */
-    public function removeAdminRole(\Mamf\AdminBundle\Entity\Role $adminRole)
+    public function removeAdminRole(\CoreBundle\Entity\Role $adminRole)
     {
         $adminRole->removeUser($this);
         $this->adminRoles->removeElement($adminRole);
@@ -107,23 +102,6 @@ class User extends BaseUser
     }
 
 
-    public function addAuditLog(AuditLog $auditLog)
-    {
-        $this->auditLogs[] = $auditLog;
-        $auditLog->setUser($this);
-        return $this;
-    }
-
-    /**
-     * Remove child
-     *
-     * @param \Mamf\AdminBundle\Entity\Role $child
-     */
-    public function removeAuditLog(AuditLog $auditLog)
-    {
-        $this->auditLogs->removeElement($auditLog);
-        $auditLog->setUser(null);
-    }
 
     /**
      * Set accessStatus

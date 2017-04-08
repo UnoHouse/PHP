@@ -153,11 +153,11 @@ class Role
     /**
      * Add child
      *
-     * @param \Mamf\AdminBundle\Entity\Role $child
+     * @param \CoreBundle\Entity\Role $child
      *
      * @return Role
      */
-    public function addChildren(\Mamf\AdminBundle\Entity\Role $child)
+    public function addChildren(\CoreBundle\Entity\Role $child)
     {
         $this->children[] = $child;
         $child->setParent($this);
@@ -168,9 +168,9 @@ class Role
     /**
      * Remove child
      *
-     * @param \Mamf\AdminBundle\Entity\Role $child
+     * @param \CoreBundle\Entity\Role $child
      */
-    public function removeChildren(\Mamf\AdminBundle\Entity\Role $child)
+    public function removeChildren(\CoreBundle\Entity\Role $child)
     {
         $child->setParent(null);
         $this->children->removeElement($child);
@@ -196,11 +196,11 @@ class Role
     /**
      * Add child
      *
-     * @param \Mamf\AdminBundle\Entity\Role $child
+     * @param \CoreBundle\Entity\Role $child
      *
      * @return Role
      */
-    public function addChild(\Mamf\AdminBundle\Entity\Role $child)
+    public function addChild(\CoreBundle\Entity\Role $child)
     {
         $this->children[] = $child;
 
@@ -210,9 +210,9 @@ class Role
     /**
      * Remove child
      *
-     * @param \Mamf\AdminBundle\Entity\Role $child
+     * @param \CoreBundle\Entity\Role $child
      */
-    public function removeChild(\Mamf\AdminBundle\Entity\Role $child)
+    public function removeChild(\CoreBundle\Entity\Role $child)
     {
         $this->children->removeElement($child);
     }
@@ -220,11 +220,11 @@ class Role
     /**
      * Add user
      *
-     * @param \Mamf\AdminBundle\Entity\User $user
+     * @param \CoreBundle\Entity\User $user
      *
      * @return Role
      */
-    public function addUser(\Mamf\AdminBundle\Entity\User $user)
+    public function addUser(\CoreBundle\Entity\User $user)
     {
         $this->user[] = $user;
 
@@ -234,9 +234,9 @@ class Role
     /**
      * Remove user
      *
-     * @param \Mamf\AdminBundle\Entity\User $user
+     * @param \CoreBundle\Entity\User $user
      */
-    public function removeUser(\Mamf\AdminBundle\Entity\User $user)
+    public function removeUser(\CoreBundle\Entity\User $user)
     {
         $this->user->removeElement($user);
     }
@@ -254,11 +254,11 @@ class Role
     /**
      * Add permission
      *
-     * @param \Mamf\AdminBundle\Entity\Permission $permission
+     * @param \CoreBundle\Entity\Permission $permission
      *
      * @return Role
      */
-    public function addPermission(\Mamf\AdminBundle\Entity\Permission $permission)
+    public function addPermission(\CoreBundle\Entity\Permission $permission)
     {
         $this->permissions[] = $permission;
 
@@ -268,9 +268,9 @@ class Role
     /**
      * Remove permission
      *
-     * @param \Mamf\AdminBundle\Entity\Permission $permission
+     * @param \CoreBundle\Entity\Permission $permission
      */
-    public function removePermission(\Mamf\AdminBundle\Entity\Permission $permission)
+    public function removePermission(\CoreBundle\Entity\Permission $permission)
     {
         $this->permissions->removeElement($permission);
     }
