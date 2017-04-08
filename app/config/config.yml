@@ -1,13 +1,14 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@ApiAndroidBundle/Resources/config/services.yml" }
+    - { resource: "@CoreBundle/Resources/config/services.yml" }
+    - { resource: "@CoreBundle/Resources/config/config.yml" }
+    - { resource: "@CoreBundle/Resources/config/security.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: pl
 
 framework:
     #esi:             ~
@@ -69,18 +70,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-knp_doctrine_behaviors:
-    blameable:      true
-    timestampable:  true
-    geocodable:     false
-    loggable:       false
-    sluggable:      false
-    soft_deletable: false
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        # enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts: [admin]
-        # ...

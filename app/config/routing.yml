@@ -1,12 +1,5 @@
-api_android:
-    resource: "@ApiAndroidBundle/Controller/"
-    type:     annotation
-    prefix:   /api/android
+core_routes:
+    resource: "@CoreBundle/Resources/config/routing.yml"
 
-app:
-    resource: "@CoreBundle/Controller/"
-    type:     annotation
-
-admin_area:
-    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
-    prefix: /admin
+api_android_routes:
+    resource: "@ApiAndroidBundle/Resources/config/routing.yml"
