@@ -4,12 +4,13 @@ namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Swagger\Annotations as SWG;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
+ * @SWG\Definition(required={"name"}, type="object", @SWG\Xml(name="User"))
  */
 class User extends BaseUser
 {
@@ -20,12 +21,14 @@ class User extends BaseUser
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @SWG\Property(format="int64")
      */
     protected $id;
 
 
     /**
      * @ORM\ManyToMany(targetEntity="Role", mappedBy="user")
+     * @SWG\Property(@SWG\Xml(name="adminRoles", wrapped=true))
      */
     protected $adminRoles;
 
