@@ -2,15 +2,34 @@
 
 namespace ApiAndroidBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcher;
 use Swagger\Annotations as SWG;
 
 class AuthenticationController extends FOSRestController
 {
     /**
-     * @Rest\Get("/authenticate")
-     * @Rest\View()
+     * @Rest\Post("/authenticate")
+     * @QueryParam(
+     *     name="email",
+     *     requirements={"rule" = "\d+", "error_message" = "DUPAAAAAA", "message" = "DUPAAAAAAmmmmmm"},
+     *     description="DUPA BLADA NA WAS SPADA",
+     *     nullable=false,
+     *     allowBlank=true,
+     *     strict=true,
+     * )
+     * @RequestParam(
+     *     name="password",
+     *     requirements={"rule" = "\d+", "error_message" = "DUPAAAAAA", "message" = "DUPAAAAAAmmmmmm"},
+     *     nullable=false,
+     *     allowBlank=true,
+     *     strict=true,
+     * )
      *
      * @SWG\Get(
      *   path="/authenticate",
@@ -49,10 +68,27 @@ class AuthenticationController extends FOSRestController
      *   )
      * )
      */
-    public function authenticateAction()
+    public function authenticateAction(Request $request)
     {
+        $requestEmail = $request->get('email');
+        $requestPassword = $request->get('Password');
+//        $entityManager = $this->getContainer()->get();
+        $repositoryManager = $this->getDoctrine()->getManager();
+        /** @var QueryBuilder $qb */
+        $qb = $repositoryManager->createQueryBuilder();
+        $row = $qb->select('u')
+            ->from('CoreBundle:User', 'u')
+            ->where("u.email = '" . $requestEmail . "'")
+            ->andWhere("u.password = '" . $requestPassword . "'")
+            ->getQuery()
+            ->getOneOrNullResult();
+        if (!is_null($row) && !empty($row) && is_object($row)) {
+            return $row->getTargetUrl();
+        }
+
         $view = $this->view(['status' => "you need to authenticate"]);
         return $this->handleView($view);
     }
+
 
 }
