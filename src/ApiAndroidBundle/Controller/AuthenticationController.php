@@ -3,6 +3,7 @@
 namespace ApiAndroidBundle\Controller;
 
 use Doctrine\ORM\QueryBuilder;
+use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -71,24 +72,21 @@ class AuthenticationController extends FOSRestController
     public function authenticateAction(Request $request)
     {
         $requestEmail = $request->get('email');
-        $requestPassword = $request->get('Password');
-//        $entityManager = $this->getContainer()->get();
-        $repositoryManager = $this->getDoctrine()->getManager();
-        /** @var QueryBuilder $qb */
-        $qb = $repositoryManager->createQueryBuilder();
-        $row = $qb->select('u')
-            ->from('CoreBundle:User', 'u')
-            ->where("u.email = '" . $requestEmail . "'")
-            ->andWhere("u.password = '" . $requestPassword . "'")
-            ->getQuery()
-            ->getOneOrNullResult();
+        $requestPassword = $request->get('password');
+        /** @var UserManager $userManager */
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserByUsernameOrEmail($requestEmail);
+        var_dump($user);exit;
+
+        if (!$user) {
+            throw $this->createNotFoundException('No demouser found!');
+        }
         if (!is_null($row) && !empty($row) && is_object($row)) {
-            return $row->getTargetUrl();
+            return $row->getId();
         }
 
         $view = $this->view(['status' => "you need to authenticate"]);
         return $this->handleView($view);
     }
-
 
 }
