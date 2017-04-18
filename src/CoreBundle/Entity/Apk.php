@@ -117,7 +117,6 @@ class Apk
             $this->getFileName()
         );
 
-
         $this->setFile(null);
     }
 

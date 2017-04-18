@@ -5,7 +5,7 @@ namespace ApiAndroidBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
-
+use CoreBundle\Entity;
 
 class AppController extends FOSRestController
 {
@@ -26,8 +26,19 @@ class AppController extends FOSRestController
      */
     public function getLatestAppVersionAction()
     {
-        $view = $this->view(['status' => "latest version is 1.0.1"]);
-        return $this->handleView($view);
+        $repositoryManager = $this->getDoctrine()->getManager();
+        $qb = $repositoryManager->createQueryBuilder();
+        $row = $qb->select('a')
+            ->from('CoreBundle:Apk', 'a')
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult();
+        if (!is_null($row) && !empty($row) && is_object($row)) {
+            $arrReturn = array('version' =>$row->getVersion());
+            return $arrReturn;
+        }
+        return false;
+
     }
 
     /**
