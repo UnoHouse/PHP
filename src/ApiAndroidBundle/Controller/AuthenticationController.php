@@ -11,11 +11,13 @@ use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use Swagger\Annotations as SWG;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationController extends FOSRestController
 {
     /**
-     * @Rest\Post("/authenticate")
+     * @Rest\Post("/authentication")
      * @QueryParam(
      *     name="email",
      *     requirements={"rule" = "\d+", "error_message" = "DUPAAAAAA", "message" = "DUPAAAAAAmmmmmm"},
@@ -32,8 +34,8 @@ class AuthenticationController extends FOSRestController
      *     strict=true,
      * )
      *
-     * @SWG\Get(
-     *   path="/authenticate",
+     * @SWG\Post(
+     *   path="/authentication",
      *   summary="used to authenticate user",
      *   tags={"authentication"},
      *   @SWG\Parameter(
@@ -71,22 +73,39 @@ class AuthenticationController extends FOSRestController
      */
     public function authenticateAction(Request $request)
     {
-        $requestEmail = $request->get('email');
+        $requestUsername = $request->get('email');
         $requestPassword = $request->get('password');
+
+        if (is_null($requestUsername) || is_null($requestPassword)) {
+            return new Response(
+                'Please verify all your inputs.',
+                Response::HTTP_UNAUTHORIZED,
+                array('Content-type' => 'application/json')
+            );
+        }
+
         /** @var UserManager $userManager */
         $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->findUserByUsernameOrEmail($requestEmail);
-        var_dump($user);exit;
+        /** @var EncoderFactory $factory */
+        $factory = $this->get('security.encoder_factory');
 
-        if (!$user) {
-            throw $this->createNotFoundException('No demouser found!');
+        $user = $userManager->findUserByUsernameOrEmail($requestUsername);
+        $encoder = $factory->getEncoder($user);
+        $salt = $user->getSalt();
+        if ($encoder->isPasswordValid($user->getPassword(), $requestPassword, $salt)) {
+            $response = new Response(
+                'Welcome ' . $user->getUsername(),
+                Response::HTTP_OK,
+                array('Content-type' => 'application/json')
+            );
+        } else {
+            $response = new Response(
+                'Username or Password not valid.',
+                Response::HTTP_UNAUTHORIZED,
+                array('Content-type' => 'application/json')
+            );
         }
-        if (!is_null($row) && !empty($row) && is_object($row)) {
-            return $row->getId();
-        }
-
-        $view = $this->view(['status' => "you need to authenticate"]);
-        return $this->handleView($view);
+        return $response;
     }
 
 }
