@@ -6,6 +6,9 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Swagger\Annotations as SWG;
 use CoreBundle\Entity;
+use CoreBundle\Constants;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AppController extends FOSRestController
 {
@@ -34,11 +37,14 @@ class AppController extends FOSRestController
             ->getQuery()
             ->getOneOrNullResult();
         if (!is_null($row) && !empty($row) && is_object($row)) {
-            $arrReturn = array('version' =>$row->getVersion());
+            $arrReturn = array('version' => $row->getVersion());
             return $arrReturn;
         }
-        return false;
-
+        return new Response(
+            'No application data found',
+            Response::HTTP_NOT_FOUND,
+            array('Content-type' => 'application/json')
+        );
     }
 
     /**
@@ -58,7 +64,23 @@ class AppController extends FOSRestController
      */
     public function getLatestAppAction()
     {
-        $view = $this->view(['status' => "get file"]);
-        return $this->handleView($view);
+        $repositoryManager = $this->getDoctrine()->getManager();
+        $qb = $repositoryManager->createQueryBuilder();
+        $row = $qb->select('a')
+            ->from('CoreBundle:Apk', 'a')
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult();
+        if (!is_null($row) && !empty($row) && is_object($row)) {
+            $file = Constants\Upload::APK_UPLOAD_DIR . '/' . $row->getFileName();
+            $response = new BinaryFileResponse($file);
+            return $response;
+        }
+
+        return new Response(
+            'No application data found',
+            Response::HTTP_NOT_FOUND,
+            array('Content-type' => 'application/json')
+        );
     }
 }
