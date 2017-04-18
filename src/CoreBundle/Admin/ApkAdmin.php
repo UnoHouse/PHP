@@ -25,6 +25,13 @@ class ApkAdmin extends AbstractAdmin
                 'required' => false,
                 'data_class' => null
             ));
+        $formMapper
+            ->add('fileName', 'text',
+                array(
+                    'label' => 'File Name',
+                    'disabled' => true,
+                )
+            );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -34,6 +41,7 @@ class ApkAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        $listMapper->addIdentifier('fileName');
         $listMapper->addIdentifier('version');
         $listMapper->addIdentifier('createdBy');
         $listMapper->addIdentifier('createdAt');

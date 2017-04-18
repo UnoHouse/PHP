@@ -9,11 +9,13 @@
 
 namespace CoreBundle\Entity;
 
+use CoreBundle\Constants\Upload;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Apk
 {
@@ -32,9 +34,6 @@ class Apk
      */
     private $version;
 
-    /**
-     * @ORM\Column(type="string")
-     */
     private $file;
 
     /**
@@ -112,20 +111,19 @@ class Apk
         if (null === $this->getFile()) {
             return;
         }
-        dump($this->getFile());
-        exit;
+        $this->setFileName($this->getVersion() . '-' . $this->getFile()->getClientOriginalName());
         $this->getFile()->move(
-            self::SERVER_PATH_TO_IMAGE_FOLDER,
-            $this->getFile()->getClientOriginalName()
+            Upload::APK_UPLOAD_DIR,
+            $this->getFileName()
         );
 
-        $this->setFileName($this->getFile()->getClientOriginalName());
 
         $this->setFile(null);
     }
 
     /**
-     * Lifecycle callback to upload the file to the server
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
     public function lifecycleFileUpload()
     {
