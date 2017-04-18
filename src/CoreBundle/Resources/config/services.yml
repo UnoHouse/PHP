@@ -1,4 +1,9 @@
+#imports:
+#    - { resource: "@CoreBundle/Resources/config/Doctrine/Apk.orm.yml" }
+
 services:
-#    api.example:
-#        class: ApiAndroidBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    admin.apk:
+        class: CoreBundle\Admin\ApkAdmin
+        arguments: [~, CoreBundle\Entity\Apk, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Apk }
