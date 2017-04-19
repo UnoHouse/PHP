@@ -2,8 +2,8 @@
 /**
  * @SWG\Swagger(
  *     schemes={"http"},
- *     host="unohouse.salwa.com.pl",
- *     basePath="/v1",
+ *     host="195.181.209.40",
+ *     basePath="/api",
  *
  *     @SWG\Info(
  *         version="0.1.0",

@@ -7,3 +7,9 @@ services:
         arguments: [~, CoreBundle\Entity\Apk, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Apk }
+
+    admin.dht:
+        class: CoreBundle\Admin\DhtAdmin
+        arguments: [~, CoreBundle\Entity\DhtSensor, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Dht }

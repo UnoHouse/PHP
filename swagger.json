@@ -12,8 +12,8 @@
         },
         "version": "0.1.0"
     },
-    "host": "unohouse.salwa.com.pl",
-    "basePath": "/v1",
+    "host": "195.181.209.40",
+    "basePath": "/api",
     "schemes": [
         "http"
     ],
@@ -44,8 +44,8 @@
                 }
             }
         },
-        "/authenticate": {
-            "get": {
+        "/authentication": {
+            "post": {
                 "tags": [
                     "authentication"
                 ],
