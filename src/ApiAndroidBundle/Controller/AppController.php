@@ -36,10 +36,12 @@ class AppController extends FOSRestController
             ->orderBy('a.version', 'ASC')
             ->getQuery()
             ->getOneOrNullResult();
+
         if (!is_null($row) && !empty($row) && is_object($row)) {
             $arrReturn = array('version' => $row->getVersion());
             return $arrReturn;
         }
+
         return new Response(
             'No application data found',
             Response::HTTP_NOT_FOUND,
