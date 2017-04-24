@@ -22,7 +22,7 @@ class AppController extends FOSRestController
      *   tags={"app"},
      *   @SWG\Response(
      *     response=200,
-     *     description="version of application",
+     *     description="Integer number with version of application(I.E. 1, 2, 3, etc...)",
      *   )
      * )
      *
