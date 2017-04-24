@@ -31,8 +31,11 @@ class VersionValidator
     public function validate($apkVersion)
     {
         $latestApkVersion = $this->apkManager->getLatestAppVersion();
-        if($latestApkVersion == null){
+        if ($latestApkVersion == null) {
             return true;
+        }
+        if ($latestApkVersion <= $apkVersion) {
+            return false;
         }
     }
 }

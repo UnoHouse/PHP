@@ -26,6 +26,8 @@ class ApkManager
     public function getLatestAppVersion()
     {
         $repository = $this->entityManager->getRepository('CoreBundle:Apk');
-        return $repository->findOneBy(array(), array('version' => 'asc'));
+        $row = $repository->findOneBy(array(), array('version' => 'asc'));
+        
+        return $row->getVersion();
     }
 }

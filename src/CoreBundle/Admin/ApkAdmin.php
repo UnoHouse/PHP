@@ -80,6 +80,12 @@ class ApkAdmin extends AbstractAdmin
         $versionValidator = $this->getConfigurationPool()->getContainer()->get('apk.validator.version');
         /** @var UploadedFile $file */
         $file = $object->getFile();
-        $versionValidator->validate($apkRepository->getVersionCodeFromAPK($file->getRealPath()));
+        $fileVersion = $apkRepository->getVersionCodeFromAPK($file->getRealPath());
+        if (!$versionValidator->validate($fileVersion)) {
+            $errorElement->addViolation('There is already a version with the same number: ' . $fileVersion);
+        }
+//        if(is_array($status)){
+//            return $status['error'];
+//        }
     }
 }
