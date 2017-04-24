@@ -10,7 +10,9 @@
 namespace CoreBundle\Entity;
 
 use CoreBundle\Constants\Upload;
+use CoreBundle\Constants\Base;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
@@ -30,10 +32,16 @@ class Apk
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $version;
 
+    /**
+     * @Assert\File(mimeTypes={
+     *     "application/vnd.android.package-archive",
+     *     "application/zip"
+     * })
+     */
     private $file;
 
     /**
@@ -111,7 +119,7 @@ class Apk
         if (null === $this->getFile()) {
             return;
         }
-        $this->setFileName($this->getVersion() . '-' . $this->getFile()->getClientOriginalName());
+        $this->setFileName($this->getVersion() . '-' . Base::BASE_APK_NAME);
         $this->getFile()->move(
             Upload::APK_UPLOAD_DIR,
             $this->getFileName()

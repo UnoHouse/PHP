@@ -15,4 +15,16 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Dht }
 
     apk.reader:
-        class: CoreBundle\Reader\ApkReader
+        class: CoreBundle\Reader\ApkVersionReader
+
+    apk.manager:
+        class: CoreBundle\Manager\ApkManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    apk.validator.version:
+        class: CoreBundle\Validator\VersionValidator
+        arguments: ["@apk.manager"]
+
+    apk.repository:
+        class: CoreBundle\Repository\ApkRepository
+        arguments: [ "@apk.reader", "@apk.validator.version" ]

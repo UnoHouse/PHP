@@ -10,11 +10,13 @@
 namespace CoreBundle\Admin;
 
 use CoreBundle\Entity\Apk;
-use CoreBundle\Reader\ApkReader;
+use CoreBundle\Repository\ApkRepository;
+use CoreBundle\Validator\VersionValidator;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ApkAdmin extends AbstractAdmin
@@ -59,10 +61,25 @@ class ApkAdmin extends AbstractAdmin
      */
     public function saveFile($apk)
     {
-        /** @var ApkReader $apkReader */
-        $apkReader = $this->getConfigurationPool()->getContainer()->get('apk.reader');
+        /** @var ApkRepository $apkReader */
+        $apkRepository = $this->getConfigurationPool()->getContainer()->get('apk.repository');
         /** @var UploadedFile $file */
         $file = $apk->getFile();
-        $apk->setVersion($apkReader->getVersionCodeFromAPK($file->getRealPath()));
+        $apk->setVersion($apkRepository->getVersionCodeFromAPK($file->getRealPath()));
+    }
+
+    /**
+     * @param ErrorElement $errorElement
+     * @param mixed $object
+     */
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        /** @var ApkRepository $apkReader */
+        $apkRepository = $this->getConfigurationPool()->getContainer()->get('apk.repository');
+        /** @var VersionValidator $versionValidator */
+        $versionValidator = $this->getConfigurationPool()->getContainer()->get('apk.validator.version');
+        /** @var UploadedFile $file */
+        $file = $object->getFile();
+        $versionValidator->validate($apkRepository->getVersionCodeFromAPK($file->getRealPath()));
     }
 }

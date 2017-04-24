@@ -7,7 +7,7 @@
  * Time: 17:23
  */
 namespace CoreBundle\Reader;
-class ApkReader
+class ApkVersionReader
 {
 
     public function getVersionCodeFromAPK($APKLocation)
