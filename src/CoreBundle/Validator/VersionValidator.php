@@ -34,8 +34,9 @@ class VersionValidator
         if ($latestApkVersion == null) {
             return true;
         }
-        if ($latestApkVersion <= $apkVersion) {
+        if ($latestApkVersion >= $apkVersion) {
             return false;
         }
+        return false;
     }
 }
