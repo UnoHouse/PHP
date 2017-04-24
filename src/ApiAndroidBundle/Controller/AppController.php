@@ -22,7 +22,7 @@ class AppController extends FOSRestController
      *   tags={"app"},
      *   @SWG\Response(
      *     response=200,
-     *     description="version of application"
+     *     description="version of application",
      *   )
      * )
      *
@@ -33,7 +33,7 @@ class AppController extends FOSRestController
         $qb = $repositoryManager->createQueryBuilder();
         $row = $qb->select('a')
             ->from('CoreBundle:Apk', 'a')
-            ->orderBy('a.id', 'ASC')
+            ->orderBy('a.version', 'ASC')
             ->getQuery()
             ->getOneOrNullResult();
         if (!is_null($row) && !empty($row) && is_object($row)) {
