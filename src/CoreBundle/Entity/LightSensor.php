@@ -39,7 +39,7 @@ class LightSensor
     private $microcontrollerDate;
 
     /**
-     * @ORM\Column(type="double", scale="2")
+     * @ORM\Column(type="decimal", precision=6, scale=2)
      */
     private $sensorValue;
 

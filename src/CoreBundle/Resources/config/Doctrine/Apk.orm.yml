@@ -1,0 +1,24 @@
+services:
+    app.admin.apk:
+        class: CoreBundle\Entity\Apk:
+        type: entity
+        repositoryClass: AppBundle\Entity\Repositories\ImageRepository
+        table: apk
+        id:
+        id:
+            type:         integer
+            generator:    { strategy: AUTO }
+        fields:
+        filename:
+            type:         string
+            length:       100
+
+        # changed when files are uploaded, to force preUpdate and postUpdate to fire
+        updated:
+            type:         datetime
+            nullable:     true
+
+        # ... other fields ...
+        lifecycleCallbacks:
+            prePersist:   [ lifecycleFileUpload ]
+            preUpdate:    [ lifecycleFileUpload ]

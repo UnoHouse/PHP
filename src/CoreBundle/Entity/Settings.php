@@ -29,17 +29,17 @@ class Settings
     private $id;
 
     /**
-     * @ORM\Column(type="string", length="255")
+     * @ORM\Column(type="string", length=255)
      */
     private $code;
 
     /**
-     * @ORM\Column(type="string", length="255")
+     * @ORM\Column(type="string", length=255)
      */
     private $key;
 
     /**
-     * @ORM\Column(type="string", length="255")
+     * @ORM\Column(type="string", length=255)
      */
     private $value;
 
