@@ -1,0 +1,13 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 172.17.0.1
+    database_port: null
+    database_name: unohouse
+    database_user: root
+    database_password: password
+    mailer_transport: smtp
+    mailer_host: mail.salwa.com.pl
+    mailer_user: unohouse@salwa.com.pl
+    mailer_password: '!!UnoHouse!!'
+    secret: 7c60e68a65eb2b32df0dc2c000ba4440ba4cadb7
+    locale: pl

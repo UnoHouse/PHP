@@ -1,5 +1,3 @@
-#imports:
-#    - { resource: "@CoreBundle/Resources/config/Doctrine/Apk.orm.yml" }
 
 services:
     admin.apk:
