@@ -1,0 +1,127 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "UnoHouse Android API",
+        "description": "Android api for managing database config.",
+        "contact": {
+            "email": "unohouse@salwa.com.pl"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "0.1.0"
+    },
+    "host": "unohouse.salwa.com.pl",
+    "basePath": "/v1",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/app/latest/version": {
+            "get": {
+                "tags": [
+                    "app"
+                ],
+                "summary": "Latest application version",
+                "responses": {
+                    "200": {
+                        "description": "version of application"
+                    }
+                }
+            }
+        },
+        "/app/latest/app": {
+            "get": {
+                "tags": [
+                    "app"
+                ],
+                "summary": "Latest application binary file",
+                "responses": {
+                    "200": {
+                        "description": "binary file"
+                    }
+                }
+            }
+        },
+        "/authentication": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "used to authenticate user",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "User email",
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 20,
+                        "minLength": 10
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User password",
+                        "required": true,
+                        "type": "string",
+                        "maxLength": 20,
+                        "minLength": 9
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Supplied credentials are correct ",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "401": {
+                        "description": "Supplied credentials are incorrect "
+                    },
+                    "400": {
+                        "description": "There are no credentials in request, or credentials are not valid (i.e. too short field length)"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "adminRoles": {
+                    "xml": {
+                        "name": "adminRoles",
+                        "wrapped": true
+                    }
+                }
+            },
+            "type": "object",
+            "xml": {
+                "name": "User"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "app",
+            "description": "Endpoint that allow to manage app, i.e. update, check version"
+        },
+        {
+            "name": "authentication",
+            "description": "Authentication service, used to log in user."
+        },
+        {
+            "name": "user",
+            "description": "Operations about user"
+        }
+    ]
+}
