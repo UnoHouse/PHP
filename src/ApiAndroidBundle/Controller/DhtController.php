@@ -33,6 +33,7 @@ class DhtController extends FOSRestController
      */
     public function postTempAndHumidityAction()
     {
-        dump($this->container->get('request'));exit;
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        dump($request);exit;
     }
 }
