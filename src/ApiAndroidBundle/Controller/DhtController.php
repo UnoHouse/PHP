@@ -36,6 +36,8 @@ class DhtController extends FOSRestController
         $requestTemp = $request->get('temperature');
         $requestHum = $request->get('humidity');
         $requestDhtNo = $request->get('dhtNo', 1);
+        $requestDhtNo = $request->get('dateMicrocontroller', 1);
+//        dump($requestTemp,$requestHum,$requestDhtNo);exit;
         $arrReturn = ['temperature' => $requestTemp, 'humidity' => $requestHum];
         $dht = new Entity\DhtSensor();
         $dht->setHumidity($requestHum);
