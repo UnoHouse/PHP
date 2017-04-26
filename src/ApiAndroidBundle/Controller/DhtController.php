@@ -41,7 +41,9 @@ class DhtController extends FOSRestController
         $dht->setHumidity($requestHum);
         $dht->setTemp($requestTemp);
         $dht->setDhtNo($requestDhtNo);
-        $this->getDoctrine()->getManager()->persist($dht);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($dht);
+        $em->flush();
 
         return new Response(
             json_encode($arrReturn),
