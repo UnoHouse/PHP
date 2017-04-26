@@ -9,6 +9,7 @@ use CoreBundle\Entity;
 use CoreBundle\Constants;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Date;
 
 class DhtController extends FOSRestController
 {
@@ -36,18 +37,18 @@ class DhtController extends FOSRestController
         $requestTemp = $request->get('temperature');
         $requestHum = $request->get('humidity');
         $requestDhtNo = $request->get('dhtNo', 1);
-        $requestDhtNo = $request->get('dateMicrocontroller', 1);
-//        dump($requestTemp,$requestHum,$requestDhtNo);exit;
+        $dateMicrocontroller = $request->get('dateMicrocontroller');
         $arrReturn = ['temperature' => $requestTemp, 'humidity' => $requestHum];
         $dht = new Entity\DhtSensor();
         $dht->setHumidity($requestHum);
         $dht->setTemp($requestTemp);
-        $dht->setDhtNo($requestDhtNo);
+        $dht->setDhtNo((int)$requestDhtNo);
+        $dht->setMicrocontrollerDate(new \DateTime($dateMicrocontroller));
         $em = $this->getDoctrine()->getManager();
         $em->persist($dht);
-        try{
+        try {
             $em->flush();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             var_dump($e->getMessage());
         }
 
