@@ -43,7 +43,11 @@ class DhtController extends FOSRestController
         $dht->setDhtNo($requestDhtNo);
         $em = $this->getDoctrine()->getManager();
         $em->persist($dht);
-        $em->flush();
+        try{
+            $em->flush();
+        }catch(Exception $e){
+            var_dump($e->getMessage());
+        }
 
         return new Response(
             json_encode($arrReturn),
