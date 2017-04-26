@@ -35,7 +35,14 @@ class DhtController extends FOSRestController
     {
         $requestTemp = $request->get('temperature');
         $requestHum = $request->get('humidity');
+        $requestDhtNo = $request->get('dhtNo', 1);
         $arrReturn = ['temperature' => $requestTemp, 'humidity' => $requestHum];
+        $dht = new Entity\DhtSensor();
+        $dht->setHumidity($requestHum);
+        $dht->setTemp($requestTemp);
+        $dht->setDhtNo($requestDhtNo);
+        $this->getDoctrine()->getManager()->persist($dht);
+
         return new Response(
             json_encode($arrReturn),
             Response::HTTP_OK,
