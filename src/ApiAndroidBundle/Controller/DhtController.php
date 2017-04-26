@@ -8,7 +8,7 @@ use Swagger\Annotations as SWG;
 use CoreBundle\Entity;
 use CoreBundle\Constants;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class DhtController extends FOSRestController
 {
@@ -31,9 +31,15 @@ class DhtController extends FOSRestController
      * @Rest\View()
      *
      */
-    public function postTempAndHumidityAction()
+    public function postTempAndHumidityAction(Request $request)
     {
-        $request = $this->container->get('request_stack')->getCurrentRequest();
-        dump($request);exit;
+        $requestTemp = $request->get('temperature');
+        $requestHum = $request->get('humidity');
+        $arrReturn = ['temperature' => $requestTemp, 'humidity' => $requestHum];
+        return new Response(
+            json_encode($arrReturn),
+            Response::HTTP_OK,
+            array('Content-type' => 'application/json')
+        );
     }
 }
