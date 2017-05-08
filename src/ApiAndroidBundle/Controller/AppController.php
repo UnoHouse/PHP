@@ -34,6 +34,7 @@ class AppController extends FOSRestController
         $row = $qb->select('a')
             ->from('CoreBundle:Apk', 'a')
             ->orderBy('a.version', 'ASC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -71,6 +72,7 @@ class AppController extends FOSRestController
         $row = $qb->select('a')
             ->from('CoreBundle:Apk', 'a')
             ->orderBy('a.id', 'ASC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
         if (!is_null($row) && !empty($row) && is_object($row)) {
