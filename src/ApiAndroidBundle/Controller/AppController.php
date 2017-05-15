@@ -33,7 +33,7 @@ class AppController extends FOSRestController
         $qb = $repositoryManager->createQueryBuilder();
         $row = $qb->select('a')
             ->from('CoreBundle:Apk', 'a')
-            ->orderBy('a.version', 'ASC')
+            ->orderBy('a.version', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
@@ -71,7 +71,7 @@ class AppController extends FOSRestController
         $qb = $repositoryManager->createQueryBuilder();
         $row = $qb->select('a')
             ->from('CoreBundle:Apk', 'a')
-            ->orderBy('a.version', 'ASC')
+            ->orderBy('a.version', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
