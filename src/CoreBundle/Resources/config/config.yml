@@ -90,27 +90,6 @@ sonata_admin:
 
         # Enable automatic registration of annotations with JMSDiExtraBundle
         enable_jms_di_extra_autoregistration: true
-#    dashboard:
-#        groups:
-#            id:
-#                label:                ~
-#                label_catalogue:      ~
-#                icon:                 '<i class="fa fa-folder"></i>'
-#                provider:             ~
-#                items:
-#                    admin:                ~
-#                    label:                ~
-#                    route:                ~
-#                    route_params:         []
-#                item_adds:            []
-#                roles:                []
-#        blocks:
-#            type:                 ~
-#            roles:                []
-#            settings:
-#                id:                   ~
-#            position:             right
-#            class:                col-md-4
     admin_services:
         model_manager:        null
         form_contractor:      null
@@ -127,11 +106,6 @@ sonata_admin:
         route_builder:        null
         label_translator_strategy:  null
         pager_type:           null
-#        templates:
-#            form: []
-#            filter: []
-#            view:
-#                id: ~
     templates:
         user_block:           'SonataAdminBundle:Core:user_block.html.twig'
         add_block:            'SonataAdminBundle:Core:add_block.html.twig'

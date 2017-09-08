@@ -20,15 +20,12 @@ class AuthenticationController extends FOSRestController
      * @Rest\Post("/authentication")
      * @QueryParam(
      *     name="email",
-     *     requirements={"rule" = "\d+", "error_message" = "DUPAAAAAA", "message" = "DUPAAAAAAmmmmmm"},
-     *     description="DUPA BLADA NA WAS SPADA",
      *     nullable=false,
      *     allowBlank=true,
      *     strict=true,
      * )
      * @RequestParam(
      *     name="password",
-     *     requirements={"rule" = "\d+", "error_message" = "DUPAAAAAA", "message" = "DUPAAAAAAmmmmmm"},
      *     nullable=false,
      *     allowBlank=true,
      *     strict=true,
