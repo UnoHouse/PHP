@@ -26,3 +26,7 @@ services:
     apk.repository:
         class: CoreBundle\Repository\ApkRepository
         arguments: [ "@apk.reader", "@apk.validator.version" ]
+
+parameters:
+    security.acl.permission.map:
+        class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap

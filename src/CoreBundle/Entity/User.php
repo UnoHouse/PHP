@@ -5,7 +5,7 @@ namespace CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Swagger\Annotations as SWG;
-use FOS\UserBundle\Model\User as BaseUser;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
  * @ORM\Entity
@@ -18,20 +18,18 @@ class User extends BaseUser
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @SWG\Property(format="int64")
      */
     protected $id;
-
 
     /**
      * @ORM\ManyToMany(targetEntity="Role", mappedBy="user")
      * @SWG\Property(@SWG\Xml(name="adminRoles", wrapped=true))
      */
     protected $adminRoles;
-
 
     public function __construct()
     {

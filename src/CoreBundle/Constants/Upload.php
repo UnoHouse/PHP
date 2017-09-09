@@ -12,5 +12,10 @@ namespace CoreBundle\Constants;
 class Upload
 {
     const BASE_UPLOAD_DIR = 'uploads';
-    const APK_UPLOAD_DIR = self::BASE_UPLOAD_DIR . '/apk';
+    const APK_UPLOAD_DIR_NAME = 'apk';
+
+    public static function getApkUploadDir()
+    {
+        return self::BASE_UPLOAD_DIR . '/' . self::APK_UPLOAD_DIR_NAME;
+    }
 }
