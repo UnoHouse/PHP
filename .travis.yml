@@ -16,3 +16,5 @@ services:
     - mysql
 
 script: phpunit
+notifications:
+  email: myemail
