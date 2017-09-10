@@ -1,12 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: rafal
- * Date: 24.04.17
- * Time: 17:23
- */
 namespace CoreBundle\Reader;
+
 class ApkVersionReader
 {
 

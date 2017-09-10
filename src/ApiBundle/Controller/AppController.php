@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiAndroidBundle\Controller;
+namespace ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;

@@ -1,6 +1,6 @@
 <?php
 
-namespace ApiAndroidBundle\Controller;
+namespace ApiBundle\Controller;
 
 use Doctrine\ORM\QueryBuilder;
 use FOS\UserBundle\Doctrine\UserManager;

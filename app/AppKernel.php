@@ -27,7 +27,7 @@ class AppKernel extends Kernel
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
 
             // Project custom bundles
-            new ApiAndroidBundle\ApiAndroidBundle(),
+            new ApiBundle\ApiBundle(),
             new CoreBundle\CoreBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\UserBundle\FOSUserBundle(),

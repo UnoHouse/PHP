@@ -1,5 +1,5 @@
 api_android:
-    resource: "@ApiAndroidBundle/Controller/"
+    resource: "@ApiBundle/Controller/"
     type:     annotation
     prefix:   /api
     defaults: { _format: "json"}
