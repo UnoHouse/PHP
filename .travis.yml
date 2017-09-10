@@ -5,11 +5,14 @@ group: edge
 php:
   - '7.0'
   - '7.1'
+  - hhvm
 before_script:
     - composer install
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
     - app/console doctrine:database:create --env=test --no-interaction --quiet
     - app/console doctrine:migrations:migrate --env=test --no-interaction --quiet
     - app/console cache:warmup --env=test --quiet
 services:
-    - redis
     - mysql
+
+script: phpunit
